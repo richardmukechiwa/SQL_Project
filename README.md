@@ -91,8 +91,8 @@ CROSS JOIN cte_Sub_product;
 
     SELECT    Company_response_to_consumer,
           DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS company_response_rank
-FROM      dbo.FinConsumerComplaints
-GROUP BY  Company_response_to_consumer;
+    FROM      dbo.FinConsumerComplaints
+    GROUP BY  Company_response_to_consumer;
 
 - 4 How does the timely response rate vary across different states?
 WITH CTE_response_rate AS
