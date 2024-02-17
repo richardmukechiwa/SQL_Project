@@ -3,7 +3,8 @@
 
 - Checking the data in the table
 
-%%sql
+'''SQL
+
 SELECT  *   FROM  dbo.FinConsumerComplaints;
 
 - Checking for duplicates in the table
