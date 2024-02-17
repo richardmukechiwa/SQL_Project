@@ -3,9 +3,9 @@
 
 - Checking the data in the table
 
-'''SQL
+
    SELECT  *   FROM  dbo.FinConsumerComplaints;
-'''sql
+
 - Checking for duplicates in the table
   With count_rows AS 
 (
