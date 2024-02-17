@@ -63,9 +63,9 @@ FROM       cte_product
 CROSS JOIN cte_Sub_product;
 ```
 - 2 Which issues and sub-issues are most commonly reported by consumers?
-
-
-     WITH  CTE_Issue AS
+  
+```
+WITH  CTE_Issue AS
          (
            SELECT     Issue,
            DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS Issue_rank
@@ -91,16 +91,16 @@ CROSS JOIN cte_Sub_product;
 		  CROSS JOIN   CTE_Sub_Issue
 		  WHERE  Issue_rank <= 5
 		  AND    Sub_Issue_rank <= 5;
-
+```
   - 3 What is the company's typical response to consumer complaints?
-
+```
     SELECT      Company_response_to_consumer,
                 DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS company_response_rank
     FROM        dbo.FinConsumerComplaints
     GROUP BY    Company_response_to_consumer;
-
+```
 - 4 How does the timely response rate vary across different states?
-
+```
 WITH CTE_response_rate AS
           (
           SELECT     State,
@@ -115,9 +115,9 @@ SELECT     State,
            ROUND(CAST( total_Timely_res AS REAL) * 100 / CAST(Timely_res_count AS REAL),2)  AS response_percentage
 FROM       CTE_response_rate
 ORDER BY   response_percentage DESC;
-
+```
 - 5 What is the proportion of complaints that were disputed by consumers?
-
+```
  
  WITH  CTE_proportition AS 
 (
@@ -128,11 +128,11 @@ HAVING      Consumer_disputed LIKE 'Yes'
 )
 SELECT      ROUND( CAST(dispute_count AS real) *100/(SELECT  COUNT(*) FROM dbo.FinConsumerComplaints),2) AS  dispute_proportion
 FROM        CTE_proportition;
-
+```
 - 6 Which states have the highest and lowest  ZIP code values for complaints?
-
+  
 - maximum number of complaints
-
+```
   WITH CTE_complaints_ZIP AS
 (
 SELECT        State,
@@ -153,10 +153,10 @@ GROUP BY      ZIP_code,
               State,
 			  number_complaints
 ORDER BY      number_complaints DESC;
-
+```
 - Minimum number of complaints
 
-
+```
 WITH CTE_complaints_ZIP AS
 (
 SELECT        State,
@@ -177,9 +177,9 @@ GROUP BY      ZIP_code,
               State,
 			  number_complaints
 ORDER BY      number_complaints ASC;
-
+```
 - 7 Are there any noticeable trends or patterns in the submission method (e.g., web, referral) of complaints over time?
-
+```
 SELECT          Submitted_via,
                 YEAR(Date_Sumbited) AS Year_submitted,
 				COUNT(Submitted_via)submission_method_cnt
@@ -188,9 +188,9 @@ GROUP BY        Submitted_via,
                 YEAR(Date_Sumbited)
 ORDER  BY       Year_submitted ASC,
                 submission_method_cnt;
-
+```
 - 8 What are the most common issues reported by consumers who did not provide consent for further actions?
-
+```
 SELECT         TOP 10 Consumer_consent_provided,
                Issue,
                COUNT(Issue) as issue_count,
@@ -199,9 +199,9 @@ FROM           dbo.FinConsumerComplaints
 GROUP BY       Issue,
                Consumer_consent_provided
 HAVING         Consumer_consent_provided LIKE 'Consent not provided';
-
+```
 - 9 Is there a correlation between the company's response type and the presence of monetary relief in closed cases?
-
+```
 
 SELECT        Company_public_response,
               Company_response_to_consumer
@@ -210,9 +210,9 @@ GROUP BY      Company_public_response,
               Company_response_to_consumer
 HAVING        Company_response_to_consumer LIKE 'Closed with monetary relief'
 AND           Company_public_response IS NOT NULL;
-
+```
 - 10 For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
-
+```
 SELECT       TOP 10 Company_response_to_consumer,
              Issue,
              COUNT(Issue) AS issue_cnt,
@@ -221,7 +221,7 @@ FROM         dbo.FinConsumerComplaints
 GROUP BY     Issue,
              Company_response_to_consumer
 HAVING       Company_response_to_consumer LIKE 'Closed with monetary relief';
-
+```
 ## Thank you for your time
 
 			   
