@@ -3,6 +3,7 @@
 
 - Checking the data in the table
 
+'''
 SELECT  *   FROM  dbo.FinConsumerComplaints;
 
 - Checking for duplicates in the table
@@ -31,7 +32,7 @@ WHERE   Sub_issue = '""';
 UPDATE dbo.FinConsumerComplaints
 SET    Consumer_disputed = 'NULL'
 WHERE   Consumer_disputed = 'N/A';
-
+'''
 
 ### Financial Complaints Analysis
 - 1 What is the distribution of complaints across different products and sub-products?
