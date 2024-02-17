@@ -2,6 +2,7 @@
 ### Analyzing a financial organization's complaints dataset 
 
 - Checking the data in the table
+  
   SELECT  *   FROM  dbo.FinConsumerComplaints;
 
 - Checking for duplicates in the table
@@ -34,7 +35,8 @@ WHERE   Consumer_disputed = 'N/A';
 
 ### Financial Complaints Analysis
 - 1 What is the distribution of complaints across different products and sub-products?
-  WITH cte_product AS
+
+   WITH cte_product AS
           (
             SELECT     Product,
             DENSE_RANK() OVER(ORDER BY COUNT(1) DESC) AS rank
@@ -89,12 +91,13 @@ CROSS JOIN cte_Sub_product;
 
   - 3 What is the company's typical response to consumer complaints?
 
-    SELECT    Company_response_to_consumer,
-          DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS company_response_rank
-    FROM      dbo.FinConsumerComplaints
-    GROUP BY  Company_response_to_consumer;
+    SELECT      Company_response_to_consumer,
+                DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS company_response_rank
+    FROM        dbo.FinConsumerComplaints
+    GROUP BY    Company_response_to_consumer;
 
 - 4 How does the timely response rate vary across different states?
+
 WITH CTE_response_rate AS
           (
           SELECT     State,
@@ -111,7 +114,9 @@ FROM       CTE_response_rate
 ORDER BY   response_percentage DESC;
 
 - 5 What is the proportion of complaints that were disputed by consumers?
-  WITH  CTE_proportition AS 
+
+ 
+ WITH  CTE_proportition AS 
 (
 SELECT      Count(Consumer_disputed) AS dispute_count
 FROM        dbo.FinConsumerComplaints
@@ -147,7 +152,9 @@ GROUP BY      ZIP_code,
 ORDER BY      number_complaints DESC;
 
 - Minimum number of complaints
-  WITH CTE_complaints_ZIP AS
+
+
+WITH CTE_complaints_ZIP AS
 (
 SELECT        State,
               ZIP_code,
@@ -169,6 +176,7 @@ GROUP BY      ZIP_code,
 ORDER BY      number_complaints ASC;
 
 - 7 Are there any noticeable trends or patterns in the submission method (e.g., web, referral) of complaints over time?
+
 SELECT          Submitted_via,
                 YEAR(Date_Sumbited) AS Year_submitted,
 				COUNT(Submitted_via)submission_method_cnt
@@ -179,6 +187,7 @@ ORDER  BY       Year_submitted ASC,
                 submission_method_cnt;
 
 - 8 What are the most common issues reported by consumers who did not provide consent for further actions?
+
 SELECT         TOP 10 Consumer_consent_provided,
                Issue,
                COUNT(Issue) as issue_count,
@@ -189,6 +198,8 @@ GROUP BY       Issue,
 HAVING         Consumer_consent_provided LIKE 'Consent not provided';
 
 - 9 Is there a correlation between the company's response type and the presence of monetary relief in closed cases?
+
+
 SELECT        Company_public_response,
               Company_response_to_consumer
 FROM          dbo.FinConsumerComplaints
@@ -198,6 +209,7 @@ HAVING        Company_response_to_consumer LIKE 'Closed with monetary relief'
 AND           Company_public_response IS NOT NULL;
 
 - 10 For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
+
 SELECT       TOP 10 Company_response_to_consumer,
              Issue,
              COUNT(Issue) AS issue_cnt,
