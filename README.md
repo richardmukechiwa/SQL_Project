@@ -7,7 +7,8 @@
 SELECT  *   FROM  dbo.FinConsumerComplaints;
 ```
 - Checking for duplicates in the table
-  With count_rows AS 
+```
+ With count_rows AS 
 (
 SELECT     Complaint_ID,
            Product,
@@ -60,7 +61,7 @@ SELECT     DISTINCT product,
 		   s_rnk
 FROM       cte_product
 CROSS JOIN cte_Sub_product;
-
+```
 - 2 Which issues and sub-issues are most commonly reported by consumers?
 
 
