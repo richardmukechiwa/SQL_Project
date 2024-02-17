@@ -61,9 +61,9 @@ FROM       cte_product
 CROSS JOIN cte_Sub_product;
 
 - 2 Which issues and sub-issues are most commonly reported by consumers?
-'SQL'
 
-WITH  CTE_Issue AS
+
+     WITH  CTE_Issue AS
          (
            SELECT     Issue,
            DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS Issue_rank
