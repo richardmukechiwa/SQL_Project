@@ -133,7 +133,7 @@ WITH  CTE_Issue AS
     GROUP BY    Company_response_to_consumer;
 ```
 
-- How does the timely response rate vary across different states?
+##### How does the timely response rate vary across different states?
   
 ```sql
 WITH CTE_response_rate AS
