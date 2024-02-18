@@ -17,26 +17,26 @@ SELECT     Complaint_ID,
 FROM       dbo.FinConsumerComplaints
 )
 
-SELECT    Count( * ) AS number_of_rows
-FROM  count_rows
-WHERE   row_count = 1;
+SELECT     Count( * ) AS number_of_rows
+FROM       count_rows
+WHERE      row_count = 1;
 ```
 
 - Data Cleaning steps
 
 ```sql
 UPDATE  dbo.FinConsumerComplaints
-SET   Sub_product = 'NULL'
-WHERE Sub_product = '""';
+SET     Sub_product = 'NULL'
+WHERE   Sub_product = '""';
 ```
 ```sql
-UPDATE dbo.FinConsumerComplaints
+UPDATE  dbo.FinConsumerComplaints
 SET     Sub_issue = 'NULL'
 WHERE   Sub_issue = '""'; 
 ```
 ```sql
-UPDATE dbo.FinConsumerComplaints
-SET    Consumer_disputed = 'NULL'
+UPDATE  dbo.FinConsumerComplaints
+SET     Consumer_disputed = 'NULL'
 WHERE   Consumer_disputed = 'N/A';
 ```
 
@@ -74,7 +74,7 @@ CROSS JOIN cte_Sub_product;
 WITH  CTE_Issue AS
          (
            SELECT     Issue,
-           DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS Issue_rank
+                      DENSE_RANK()OVER( ORDER BY COUNT(1) DESC) AS Issue_rank
            FROM       dbo.FinConsumerComplaints
            GROUP BY   Issue
          ),  
@@ -83,17 +83,17 @@ WITH  CTE_Issue AS
 
          (
            SELECT     Sub_issue,
-           DENSE_RANK()OVER( ORDER BY COUNT(1)DESC ) AS Sub_Issue_rank
+                      DENSE_RANK()OVER( ORDER BY COUNT(1)DESC ) AS Sub_Issue_rank
            FROM       dbo.FinConsumerComplaints
-		   GROUP BY  Sub_issue
+           GROUP BY   Sub_issue
     
           )
 
-		   SELECT      Issue,
+		   SELECT     Issue,
 		              Issue_rank,
-					  Sub_Issue,
-					  Sub_Issue_rank
-		  FROM         CTE_Issue
+                              Sub_Issue,
+                              Sub_Issue_rank
+		  FROM        CTE_Issue
 		  CROSS JOIN   CTE_Sub_Issue
 		  WHERE  Issue_rank <= 5
 		  AND    Sub_Issue_rank <= 5;
@@ -153,21 +153,21 @@ FROM        CTE_proportition;
 (
 SELECT        State,
               ZIP_code,
-			  Count(Complaint_ID) AS number_complaints
-			  FROM          dbo.FinConsumerComplaints
+              Count(Complaint_ID) AS number_complaints
+FROM          dbo.FinConsumerComplaints
 GROUP   BY    State,
               ZIP_code
 HAVING        ZIP_code IS NOT NULL
 AND           State    IS NOT NULL
 )
 
-SELECT   TOP 1 State,
+SELECT    TOP 1 State,
               ZIP_code,
-			  MAX(number_complaints) AS max_number_complaints
+              MAX(number_complaints) AS max_number_complaints
 FROM          CTE_complaints_ZIP
 GROUP BY      ZIP_code,
               State,
-			  number_complaints
+              number_complaints
 ORDER BY      number_complaints DESC;
 
 ```
@@ -179,8 +179,8 @@ WITH CTE_complaints_ZIP AS
 (
 SELECT        State,
               ZIP_code,
-			  Count(Complaint_ID) AS number_complaints
-			  FROM          dbo.FinConsumerComplaints
+              Count(Complaint_ID) AS number_complaints
+ FROM         dbo.FinConsumerComplaints
 GROUP   BY    State,
               ZIP_code
 HAVING        ZIP_code IS NOT NULL
@@ -189,7 +189,7 @@ AND           State    IS NOT NULL
 
 SELECT   TOP 1 State,
               ZIP_code,
-			  Min(number_complaints) AS max_number_complaints
+              Min(number_complaints) AS max_number_complaints
 FROM          CTE_complaints_ZIP
 GROUP BY      ZIP_code,
               State,
@@ -202,7 +202,7 @@ ORDER BY      number_complaints ASC;
 ```sql
 SELECT          Submitted_via,
                 YEAR(Date_Sumbited) AS Year_submitted,
-				COUNT(Submitted_via)submission_method_cnt
+                COUNT(Submitted_via)submission_method_cnt
 FROM            dbo.FinConsumerComplaints
 GROUP BY        Submitted_via,
                 YEAR(Date_Sumbited)
@@ -217,7 +217,7 @@ ORDER  BY       Year_submitted ASC,
 SELECT         TOP 10 Consumer_consent_provided,
                Issue,
                COUNT(Issue) as issue_count,
-			   DENSE_RANK()OVER(PARTITION BY Consumer_consent_provided ORDER BY COUNT(Issue) DESC) AS rnk
+               DENSE_RANK()OVER(PARTITION BY Consumer_consent_provided ORDER BY COUNT(Issue) DESC) AS rnk
 FROM           dbo.FinConsumerComplaints
 GROUP BY       Issue,
                Consumer_consent_provided
@@ -244,7 +244,7 @@ AND           Company_public_response IS NOT NULL;
 SELECT       TOP 10 Company_response_to_consumer,
              Issue,
              COUNT(Issue) AS issue_cnt,
-			 DENSE_RANK() OVER (PARTITION BY Company_response_to_consumer ORDER BY COUNT(Issue) DESC) AS issue_rank
+             DENSE_RANK() OVER (PARTITION BY Company_response_to_consumer ORDER BY COUNT(Issue) DESC) AS issue_rank
 FROM         dbo.FinConsumerComplaints
 GROUP BY     Issue,
              Company_response_to_consumer
