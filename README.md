@@ -23,14 +23,20 @@ A good example of a financial organization in this analysis is a bank, for every
 
 - For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
 
-  #### Data Analysis using Microsoft SQL Server 
+  ### Data Analysis using Microsoft SQL Server 
 
-- Checking the data in the table
+##### Checking the data in the table
+
+After loading the CSV file into the SQL server as a flat file I checked the dataset using the code below, data check is important because I get to confirm if the dataset ifs the right one and also if the data is clean and well transformed for the analysis.  If the data is not clean then data cleaning procedures must be performed first because we need clean data to get correct results.
 
 ```sql
-SELECT  *   FROM  dbo.FinConsumerComplaints;
+SELECT  *
+FROM    dbo.FinConsumerComplaints;
 ```
-- Checking for duplicates in the table
+
+##### Checking for duplicates in the table
+
+I also checked for duplicates in the dataset as a data-cleaning step because duplicates can give a wrong interpretation of the data.
   
 ```sql
  With count_rows AS 
@@ -47,6 +53,8 @@ WHERE      row_count = 1;
 ```
 
 #### Data Cleaning steps
+
+I removed special characters from the sub-product and sub-issue columns and  'N/A' on the consumer disputed column and replaced them with 'NULL' so that the table can have the same response where there is  nothing captured.
 
 ```sql
 UPDATE  dbo.FinConsumerComplaints
@@ -67,6 +75,9 @@ WHERE   Consumer_disputed = 'N/A';
 #### Analysis
 
 ##### What is the distribution of complaints across different products and sub-products?
+
+The complaints about products had credit cards with the highest number, followed by checking of savings accounts, mortgages, prepaid cards, bank accounts, debt collection, student loans, and vehicle loans or leases in that order. The sub-products were also ranked accordingly.
+
 ```sql
  WITH cte_product AS  
           (
@@ -92,6 +103,7 @@ SELECT     DISTINCT product,
 FROM       cte_product
 CROSS JOIN cte_Sub_product;
 ```
+
 
 ##### Which issues and sub-issues are most commonly reported by consumers?
   
