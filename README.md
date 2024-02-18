@@ -1,7 +1,14 @@
 ## SQL_Project
-### Analyzing a financial organization's complaints dataset 
 
-A good example of a financial organization in this analysis is a bank, for every bank customer service is one of the key fundamentals to survive the competition and also to realize profits. Customers bring forward issues and complaints on different products of the bank. Some of the complaints can cause damage to the reputation of the bank if they are not addressed in time and satisfactorily. In this project, we are going to analyze a financial organization's complaint dataset to understand the distribution, response effectiveness, and regional patterns, to derive actionable insights for informed decision-making and enhancing customer satisfaction. The dataset was extracted from Real World Fake Data's data. world platform. We are going to look at the following tasks...
+## Analyzing a financial organization's complaints dataset 
+
+### Executive Summary
+
+A good example of a financial organization in this analysis is a bank, for every bank customer service is one of the key fundamentals to survive the competition and also to realize profits. Customers bring forward issues and complaints on different products of the bank. Some of the complaints can cause damage to the reputation of the bank if they are not addressed in time and satisfactorily. In this project, we are going to analyze a financial organization's complaint dataset to understand the distribution, response effectiveness, and regional patterns, to derive actionable insights for informed decision-making and enhancing customer satisfaction.
+
+### Project Overview 
+
+The dataset was extracted from Real World Fake Data's data. world platform. We are going to look at the following tasks...
 
 - What is the distribution of complaints across different products and sub-products?
 
@@ -23,7 +30,7 @@ A good example of a financial organization in this analysis is a bank, for every
 
 - For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
 
-  ### Data Analysis using Microsoft SQL Server 
+### Data Analysis using Microsoft SQL Server 
 
 ##### Checking the data in the table
 
