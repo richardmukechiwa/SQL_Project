@@ -25,7 +25,7 @@ WHERE   row_count = 1;
 - Data Cleaning steps
 
 ```sql
-  UPDATE  dbo.FinConsumerComplaints
+UPDATE  dbo.FinConsumerComplaints
 SET   Sub_product = 'NULL'
 WHERE Sub_product = '""';
 ```
@@ -43,27 +43,27 @@ WHERE   Consumer_disputed = 'N/A';
 ### Financial Complaints Analysis
 - What is the distribution of complaints across different products and sub-products?
 ```sql
- WITH cte_product AS
+ WITH cte_product AS  
           (
             SELECT     Product,
-            DENSE_RANK() OVER(ORDER BY COUNT(1) DESC) AS rank
+                       DENSE_RANK() OVER(ORDER BY COUNT(1) DESC) AS prdct_rank
             FROM       dbo.FinConsumerComplaints
             GROUP BY   Product
            ),
 
-    cte_Sub_product AS
+      cte_Sub_product AS
          (
-           SELECT     Sub_product,
-           DENSE_RANK() OVER(ORDER BY COUNT(1) DESC) AS s_rnk
-           FROM       dbo.FinConsumerComplaints
-           GROUP BY   Sub_product
+           SELECT      Sub_product,
+                       DENSE_RANK() OVER(ORDER BY COUNT(1) DESC) AS Sub_prdct_rnk
+           FROM        dbo.FinConsumerComplaints
+           GROUP BY    Sub_product
 		  
           )
 
 SELECT     DISTINCT product,
-           rank,
-		   Sub_product,
-		   s_rnk
+           prdct_rank,
+           Sub_product,
+           Sub_prdct_rnk
 FROM       cte_product
 CROSS JOIN cte_Sub_product;
 ```
