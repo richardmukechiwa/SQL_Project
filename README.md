@@ -3,20 +3,20 @@
 
 - Checking the data in the table
 
-```
+```sql
 SELECT  *   FROM  dbo.FinConsumerComplaints;
 ```
 - Checking for duplicates in the table
-```
+```sql
  With count_rows AS 
 (
 SELECT     Complaint_ID,
            Product,
-		   ROW_NUMBER() OVER ( PARTITION BY Complaint_ID ORDER BY (select 1)) as row_count
+           ROW_NUMBER() OVER ( PARTITION BY Complaint_ID ORDER BY (select 1)) as row_count
 FROM       dbo.FinConsumerComplaints
 )
 
-SELECT  Count( * ) AS number_of_rows
+SELECT    Count( * ) AS number_of_rows
 FROM  count_rows
 WHERE   row_count = 1;
 
