@@ -23,6 +23,7 @@ A good example of a financial organization in this analysis is a bank, for every
 
 - For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
 
+  #### Data Analysis using Microsoft SQL Server 
 
 - Checking the data in the table
 
@@ -45,7 +46,7 @@ FROM       count_rows
 WHERE      row_count = 1;
 ```
 
-- Data Cleaning steps
+#### Data Cleaning steps
 
 ```sql
 UPDATE  dbo.FinConsumerComplaints
@@ -63,8 +64,9 @@ SET     Consumer_disputed = 'NULL'
 WHERE   Consumer_disputed = 'N/A';
 ```
 
-### Financial Complaints Analysis
-- What is the distribution of complaints across different products and sub-products?
+#### Analysis
+
+##### What is the distribution of complaints across different products and sub-products?
 ```sql
  WITH cte_product AS  
           (
@@ -91,7 +93,7 @@ FROM       cte_product
 CROSS JOIN cte_Sub_product;
 ```
 
--  Which issues and sub-issues are most commonly reported by consumers?
+##### Which issues and sub-issues are most commonly reported by consumers?
   
 ```sql
 WITH  CTE_Issue AS
@@ -122,7 +124,7 @@ WITH  CTE_Issue AS
 		  AND    Sub_Issue_rank <= 5;
 ```
 
-  - What is the company's typical response to consumer complaints?
+##### What is the company's typical response to consumer complaints?
     
 ```sql
     SELECT      Company_response_to_consumer,
@@ -151,7 +153,7 @@ ORDER BY   response_percentage DESC;
 
 ```
 
--  What is the proportion of complaints that were disputed by consumers?
+##### What is the proportion of complaints that were disputed by consumers?
   
 ``` sql
  
@@ -166,7 +168,7 @@ SELECT      ROUND( CAST(dispute_count AS real) *100/(SELECT  COUNT(*) FROM dbo.F
 FROM        CTE_proportition;
 
 ```
-- Which states have the highest and lowest  ZIP code values for complaints?
+##### Which states have the highest and lowest  ZIP code values for complaints?
   
 - maximum number of complaints
   
@@ -220,7 +222,7 @@ GROUP BY      ZIP_code,
 ORDER BY      number_complaints ASC;
 
 ```
-- Are there any noticeable trends or patterns in the submission method (e.g., web, referral) of complaints over time?
+##### Are there any noticeable trends or patterns in the submission method (e.g., web, referral) of complaints over time?
   
 ```sql
 SELECT          Submitted_via,
@@ -233,7 +235,7 @@ ORDER  BY       Year_submitted ASC,
                 submission_method_cnt;
 ```
 
-- What are the most common issues reported by consumers who did not provide consent for further actions?
+##### What are the most common issues reported by consumers who did not provide consent for further actions?
   
 ```sql
 
@@ -247,7 +249,7 @@ GROUP BY       Issue,
 HAVING         Consumer_consent_provided LIKE 'Consent not provided';
 
 ```
-- Is there a correlation between the company's response type and the presence of monetary relief in closed cases?
+##### Is there a correlation between the company's response type and the presence of monetary relief in closed cases?
   
 ```sql
 
@@ -260,7 +262,7 @@ HAVING        Company_response_to_consumer LIKE 'Closed with monetary relief'
 AND           Company_public_response IS NOT NULL;
 
 ```
-- For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
+##### For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
   
 ```sql
 
