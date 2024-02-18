@@ -30,20 +30,14 @@ UPDATE  dbo.FinConsumerComplaints
 SET   Sub_product = 'NULL'
 WHERE Sub_product = '""';
 
-```,
-
-```sql
-
 UPDATE dbo.FinConsumerComplaints
 SET     Sub_issue = 'NULL'
 WHERE   Sub_issue = '""'; 
-```,
-
-```sql
 
 UPDATE dbo.FinConsumerComplaints
 SET    Consumer_disputed = 'NULL'
 WHERE   Consumer_disputed = 'N/A';
+
 ```
 
 ### Financial Complaints Analysis
