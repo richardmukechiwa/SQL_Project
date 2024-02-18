@@ -7,6 +7,7 @@
 SELECT  *   FROM  dbo.FinConsumerComplaints;
 ```
 - Checking for duplicates in the table
+  
 ```sql
  With count_rows AS 
 (
@@ -22,18 +23,22 @@ WHERE   row_count = 1;
 ```
 
 - Data Cleaning steps
+  
   ```sql
   
 UPDATE  dbo.FinConsumerComplaints
 SET   Sub_product = 'NULL'
 WHERE Sub_product = '""';
-```
+
+```,
+
 ```sql
 
 UPDATE dbo.FinConsumerComplaints
 SET     Sub_issue = 'NULL'
 WHERE   Sub_issue = '""'; 
-```
+```,
+
 ```sql
 
 UPDATE dbo.FinConsumerComplaints
