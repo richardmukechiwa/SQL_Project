@@ -1,6 +1,29 @@
 ## SQL_Project
 ### Analyzing a financial organization's complaints dataset 
 
+A good example of a financial organization in this analysis is a bank, for every bank customer service is one of the key fundamentals to survive the competition and also to realize profits. Customers bring forward issues and complaints on different products of the bank. Some of the complaints can cause damage to the reputation of the bank if they are not addressed in time and satisfactorily. In this project, we are going to analyze a financial organization's complaint dataset to understand the distribution, response effectiveness, and regional patterns, to derive actionable insights for informed decision-making and enhancing customer satisfaction. The dataset was extracted from Real World Fake Data's data. world platform. We are going to look at the following tasks...
+
+- What is the distribution of complaints across different products and sub-products?
+
+- Which issues and sub-issues are most commonly reported by consumers?
+
+- What is the company's typical response to consumer complaints?
+
+- How does the timely response rate vary across different states?
+
+- What is the proportion of complaints that were disputed by consumers?
+
+- Which states have the highest and lowest ZIP code values for complaints?
+
+- Are there any noticeable trends or patterns in the submission method (e.g., web, referral) of complaints over time?
+
+- What are the most common issues reported by consumers who did not provide consent for further actions?
+
+- Is there a correlation between the company's response type and the presence of monetary relief in closed cases?
+
+- For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
+
+
 - Checking the data in the table
 
 ```sql
