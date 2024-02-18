@@ -33,6 +33,7 @@ After loading the CSV file into the SQL server as a flat file I checked the data
 SELECT  *
 FROM    dbo.FinConsumerComplaints;
 ```
+![sql1](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/02fa578a-92bb-4979-8664-de2034a86872)
 
 ##### Checking for duplicates in the table
 
@@ -51,6 +52,7 @@ SELECT     Count( * ) AS number_of_rows
 FROM       count_rows
 WHERE      row_count = 1;
 ```
+![sql2](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/899f3c37-0f06-45f1-8fbe-92403b42a654)
 
 #### Data Cleaning steps
 
