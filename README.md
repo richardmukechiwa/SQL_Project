@@ -8,7 +8,7 @@ A good example of a financial organization in this analysis is a bank, for every
 
 ### Project Overview 
 
-The dataset was extracted from Real World Fake Data's data. world platform. We are going to look at the following tasks...
+The project aims to understand the complaints distribution, response effectiveness, and regional patterns of the dataset to derive actionable insights to help the organization improve in areas such as  service delivery, product improvement, market demands, and turnaround time. The dataset was extracted from Real World Fake Data's data. world platform. We are going to look at the following tasks...
 
 - What is the distribution of complaints across different products and sub-products?
 
@@ -116,7 +116,8 @@ CROSS JOIN cte_Sub_product;
 
 
 ##### Which issues and sub-issues are most commonly reported by consumers?
-  
+The issue with the highest number of consumers is managing an account followed by deposits and withdrawals, and the third largest is for those who are having challenges with payments, the fourth issue is for those who are having challenges failing to pay their mortgages and the last one is for those who are not agreeing with balances showing on their statements. The Sub issues are many and are shown in the order of their numbers.
+
 ```sql
 WITH  CTE_Issue AS
          (
@@ -148,6 +149,8 @@ WITH  CTE_Issue AS
 ![SQLTWO](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/209326f8-beb1-4fd3-ac5c-add5dc6c63cc)
 
 ##### What is the company's typical response to consumer complaints?
+
+According to the analysis code  below the company's typical response to consumer complaints are  closed with an explanation and  closed with monetary relief
     
 ```sql
     SELECT      Company_response_to_consumer,
@@ -158,6 +161,7 @@ WITH  CTE_Issue AS
 ![SQLTHREE](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/234b9c5d-bd1c-4a35-9c19-b627f4cebf52)
 
 ##### How does the timely response rate vary across different states?
+The timely response rate was found between  92% and 100% with States like NH having 100% and ND state having the lowest rate of 92.59%
   
 ```sql
 WITH CTE_response_rate AS
@@ -255,6 +259,8 @@ ORDER BY      number_complaints ASC;
 
 
 ##### Are there any noticeable trends or patterns in the submission method (e.g., web, referral) of complaints over time?
+
+There are several noticeable trends in the submission methods used,  for instance, the web submission method has been rising since the year 2011 up to 2014 then it started dropping however it remained one of the most preferred methods. The referral method has been the second favoured which also has been on the rise since 2011 and the numbers started to fall again after 2014. The phone call method has been continuously rising since 2011 to 2020.
   
 ```sql
 SELECT          Submitted_via,
@@ -269,6 +275,8 @@ ORDER  BY       Year_submitted ASC,
 ![SQLSEVEN](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/bf6d1e0a-7e82-4570-84c3-ff39f833db39)
 
 ##### What are the most common issues reported by consumers who did not provide consent for further actions?
+
+Managing an account, problems with a purchase shown on your statement, attempts to collect debt not owed, and struggling to pay the mortgage form the most common issues reported by consumers.
   
 ```sql
 
@@ -286,6 +294,8 @@ HAVING         Consumer_consent_provided LIKE 'Consent not provided';
 ![SQLEIGHT](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/20211f80-1044-4f12-8ee6-a993c64cffc7)
 
 ##### Is there a correlation between the company's response type and the presence of monetary relief in closed cases?
+
+There is a strong correlation between the company's response type and the presence of monetary relief. The analysis shows that whenever the company is not providing public response a monetary relief is being proposed. 
   
 ```sql
 
@@ -302,6 +312,8 @@ AND           Company_public_response IS NOT NULL;
 
 
 ##### For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
+
+Managing an account, deposits and withdrawals, billing disputes, problems caused by my funds being low and  problems with a purchase shown on your statement are the most common issues associated with monetary relief.
   
 ```sql
 
