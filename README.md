@@ -23,8 +23,8 @@ WHERE   row_count = 1;
 ```
 
 - Data Cleaning steps
-  
-  ```sql
+
+```sql
   UPDATE  dbo.FinConsumerComplaints
 SET   Sub_product = 'NULL'
 WHERE Sub_product = '""';
