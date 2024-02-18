@@ -103,6 +103,7 @@ SELECT     DISTINCT product,
 FROM       cte_product
 CROSS JOIN cte_Sub_product;
 ```
+![SQLONE](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/8b27d985-b299-4166-bc1a-b4507714463d)
 
 
 ##### Which issues and sub-issues are most commonly reported by consumers?
@@ -135,6 +136,7 @@ WITH  CTE_Issue AS
 		  WHERE  Issue_rank <= 5
 		  AND    Sub_Issue_rank <= 5;
 ```
+![SQLTWO](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/209326f8-beb1-4fd3-ac5c-add5dc6c63cc)
 
 ##### What is the company's typical response to consumer complaints?
     
@@ -144,6 +146,7 @@ WITH  CTE_Issue AS
     FROM        dbo.FinConsumerComplaints
     GROUP BY    Company_response_to_consumer;
 ```
+![SQLTHREE](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/234b9c5d-bd1c-4a35-9c19-b627f4cebf52)
 
 ##### How does the timely response rate vary across different states?
   
@@ -164,6 +167,7 @@ FROM       CTE_response_rate
 ORDER BY   response_percentage DESC;
 
 ```
+![SQLFOUR](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/ef84d408-285a-466e-9074-58305c54e35b)
 
 ##### What is the proportion of complaints that were disputed by consumers?
   
@@ -180,6 +184,9 @@ SELECT      ROUND( CAST(dispute_count AS real) *100/(SELECT  COUNT(*) FROM dbo.F
 FROM        CTE_proportition;
 
 ```
+![SQLFIVE](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/76c3fe53-4eeb-41f5-be46-a8a7a8c35f5a)
+
+
 ##### Which states have the highest and lowest  ZIP code values for complaints?
   
 - maximum number of complaints
@@ -208,6 +215,7 @@ GROUP BY      ZIP_code,
 ORDER BY      number_complaints DESC;
 
 ```
+![SQLSIX A](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/3f209754-cd2c-418b-9540-2b38bc145ac6)
 
 - Minimum number of complaints
 
@@ -226,14 +234,17 @@ AND           State    IS NOT NULL
 
 SELECT   TOP 1 State,
               ZIP_code,
-              Min(number_complaints) AS max_number_complaints
+              Min(number_complaints) AS min_number_complaints
 FROM          CTE_complaints_ZIP
 GROUP BY      ZIP_code,
               State,
-			  number_complaints
+              number_complaints
 ORDER BY      number_complaints ASC;
 
 ```
+![SQLSIX B](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/76d261bd-7087-4e94-874d-d0535ced6c1c)
+
+
 ##### Are there any noticeable trends or patterns in the submission method (e.g., web, referral) of complaints over time?
   
 ```sql
@@ -246,6 +257,7 @@ GROUP BY        Submitted_via,
 ORDER  BY       Year_submitted ASC,
                 submission_method_cnt;
 ```
+![SQLSEVEN](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/bf6d1e0a-7e82-4570-84c3-ff39f833db39)
 
 ##### What are the most common issues reported by consumers who did not provide consent for further actions?
   
@@ -261,6 +273,9 @@ GROUP BY       Issue,
 HAVING         Consumer_consent_provided LIKE 'Consent not provided';
 
 ```
+
+![SQLEIGHT](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/20211f80-1044-4f12-8ee6-a993c64cffc7)
+
 ##### Is there a correlation between the company's response type and the presence of monetary relief in closed cases?
   
 ```sql
@@ -274,6 +289,9 @@ HAVING        Company_response_to_consumer LIKE 'Closed with monetary relief'
 AND           Company_public_response IS NOT NULL;
 
 ```
+![SQLNINE](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/8aa87203-2fd8-4210-b398-f6a0edbf11f6)
+
+
 ##### For closed cases with monetary relief, what types of issues were commonly associated with such resolutions?
   
 ```sql
@@ -287,6 +305,7 @@ GROUP BY     Issue,
              Company_response_to_consumer
 HAVING       Company_response_to_consumer LIKE 'Closed with monetary relief';
 ```
+![SQLTEN](https://github.com/richardmukechiwa/SQL_Project/assets/131812176/9e0049ad-1033-495e-9436-f55a8eca7853)
 
 ## Thank you for your time
 
