@@ -1,4 +1,4 @@
-## SQL_Project
+## Finacial Organisation Data Analysis
 
 ## Analyzing a financial organization's complaints dataset 
 
