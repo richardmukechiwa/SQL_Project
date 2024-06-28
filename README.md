@@ -1,4 +1,4 @@
-## Finacial Organisation Data Analysis
+## Financial Organisation Data Analysis
 
 ## Analyzing a financial organization's complaints dataset 
 
